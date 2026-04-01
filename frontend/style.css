@@ -555,10 +555,120 @@ footer {
     font-size: 14px;
 }
 
-/* Responsive */
+/* Info Pills */
+.info-pills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.pill {
+    background: #F7FAFC;
+    border: 1px solid #EDF2F7;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
+
+.pill-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--agri-gray);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.pill-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--agri-text);
+}
+
+.yield-val { color: var(--agri-red); }
+
+.scientific-name {
+    font-style: italic;
+    color: var(--agri-gray);
+    font-size: 13px;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    background: #F7FAFC;
+    border-radius: 8px;
+    border-left: 3px solid var(--agri-accent);
+}
+
+/* Section Blocks */
+.section-block {
+    margin-bottom: 20px;
+    border-radius: 16px;
+    padding: 20px;
+    background: #F7FAFC;
+    border: 1px solid #EDF2F7;
+}
+
+.section-block.organic-block {
+    background: #F0FFF4;
+    border-color: #C6F6D5;
+}
+
+.section-block.chemical-block {
+    background: #EBF8FF;
+    border-color: #BEE3F8;
+}
+
+.section-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--agri-green);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.organic-block .section-title { color: #2F855A; }
+.chemical-block .section-title { color: #2B6CB0; }
+
+/* Bilingual List */
+.bilingual-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bilingual-list li {
+    background: white;
+    border-radius: 10px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--agri-accent);
+}
+
+.organic-block .bilingual-list li { border-left-color: #38A169; }
+.chemical-block .bilingual-list li { border-left-color: #3182CE; }
+
+.bilingual-list li .en {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--agri-text);
+}
+
+.bilingual-list li .hi {
+    display: block;
+    font-size: 13px;
+    color: var(--agri-gray);
+    margin-top: 2px;
+}
+
+
 @media (max-width: 768px) {
     .hero h1 { font-size: 36px; }
     .hero h2 { font-size: 24px; }
     .result-header { flex-direction: column; text-align: center; gap: 20px; }
     .confidence-badge { text-align: center; }
+    .info-pills { grid-template-columns: 1fr 1fr; }
 }

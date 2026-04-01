@@ -113,29 +113,35 @@ if (document.getElementById('file-input')) {
     }
 
     function displayResult(data) {
-        document.getElementById('res-crop').textContent = data.crop;
-        document.getElementById('res-issue-type').textContent = `${data.issue_type.toUpperCase()} DIAGNOSIS`;
-        document.getElementById('res-confidence').textContent = `${data.confidence}%`;
-        document.getElementById('res-diagnosis').textContent = data.disease_or_deficiency;
-        document.getElementById('res-symptoms').textContent = `"${data.symptoms}"`;
-        document.getElementById('res-yield-risk').textContent = data.yield_risk;
-        document.getElementById('res-organic').textContent = data.organic_remedy;
-        document.getElementById('res-chemical').textContent = data.chemical_remedy;
-        
-        // New fields
-        document.getElementById('res-follow-up').textContent = data.follow_up_days || 'N/A';
-        document.getElementById('res-climate').textContent = data.climate_impact || 'No specific climate impact noted.';
-        document.getElementById('res-shop').textContent = data.nearest_shop_info || 'Visit your local agricultural dealer.';
-        document.getElementById('res-safety').textContent = data.safety_disclaimer || 'AI analysis is for guidance only. Always verify with a Krishi Vigyan Kendra (KVK) officer before applying chemical treatments.';
+        document.getElementById('res-crop').textContent = data.crop || 'Unknown';
+        document.getElementById('res-disease').textContent = data.disease_en || data.disease_or_deficiency || 'Unknown';
+        document.getElementById('res-confidence').textContent = `${data.confidence || 0}%`;
+        document.getElementById('res-scientific').textContent = data.disease_scientific || '';
+        document.getElementById('res-type').textContent = data.disease_type || data.issue_type || 'Unknown';
+        document.getElementById('res-yield').textContent = data.yield_risk || 'N/A';
+        document.getElementById('res-revisit').textContent = data.revisit_days || data.follow_up_days || 'N/A';
 
-        // Set Severity Class
         const severityBadge = document.getElementById('res-severity');
-        severityBadge.textContent = `${data.severity} Severity`;
-        severityBadge.className = 'severity-badge ' + data.severity.toLowerCase();
+        severityBadge.textContent = data.severity || 'Unknown';
+        severityBadge.className = 'severity-badge ' + (data.severity || '').toLowerCase();
+
+        // Render bilingual bullet lists
+        function renderList(elId, items) {
+            const el = document.getElementById(elId);
+            el.innerHTML = '';
+            if (!Array.isArray(items)) return;
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span class="en">${item.en}</span><span class="hi">${item.hi}</span>`;
+                el.appendChild(li);
+            });
+        }
+
+        renderList('res-symptoms', data.symptoms);
+        renderList('res-organic', data.organic);
+        renderList('res-chemical', data.chemical);
 
         resultCard.classList.remove('hidden');
-        
-        // Scroll to result
         resultCard.scrollIntoView({ behavior: 'smooth' });
     }
 }

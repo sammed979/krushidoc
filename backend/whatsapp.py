@@ -47,30 +47,44 @@ def _download_image(media_url: str) -> bytes | None:
     return None
 
 
+def _format_list(items, key_en='en', key_hi='hi') -> str:
+    """Format bilingual array into WhatsApp bullet points."""
+    if not isinstance(items, list):
+        return str(items)
+    lines = []
+    for item in items:
+        if isinstance(item, dict):
+            lines.append(f"• {item.get(key_en, '')}\n  {item.get(key_hi, '')}")
+        else:
+            lines.append(f"• {item}")
+    return "\n".join(lines)
+
+
 def _format_diagnosis(diagnosis: dict) -> str:
     crop = diagnosis.get('crop', 'Unknown')
-    issue = diagnosis.get('disease_or_deficiency', 'Unknown')
-    issue_type = diagnosis.get('issue_type', 'Diagnosis')
+    disease = diagnosis.get('disease_en', diagnosis.get('disease_or_deficiency', 'Unknown'))
+    disease_type = diagnosis.get('disease_type', diagnosis.get('issue_type', 'Unknown'))
     severity = diagnosis.get('severity', 'Unknown')
     confidence = diagnosis.get('confidence', 0)
-    symptoms = diagnosis.get('symptoms', 'N/A')[:200]
-    organic = diagnosis.get('organic_remedy', 'Consult local expert.')[:150]
-    chemical = diagnosis.get('chemical_remedy', 'Verify with KVK officer.')[:150]
     yield_risk = diagnosis.get('yield_risk', 'Unknown')
-    follow_up = diagnosis.get('follow_up_days', '7-10 days')
+    revisit = diagnosis.get('revisit_days', diagnosis.get('follow_up_days', '7-10 days'))
+
+    symptoms = _format_list(diagnosis.get('symptoms', []))
+    organic = _format_list(diagnosis.get('organic', []))
+    chemical = _format_list(diagnosis.get('chemical', []))
 
     return (
-        f"🌿 *KrishiDoc Report*\n\n"
-        f"🌾 *Crop:* {crop}\n"
-        f"🩺 *Issue:* {issue} ({issue_type})\n"
-        f"⚠️ *Severity:* {severity}\n"
-        f"📊 *Confidence:* {confidence}%\n\n"
-        f"📝 *Symptoms:* {symptoms}\n\n"
-        f"🍃 *Organic:* {organic}\n\n"
-        f"🧪 *Chemical:* {chemical}\n\n"
-        f"📉 *Yield Risk:* {yield_risk}\n"
-        f"📅 *Revisit In:* {follow_up}\n\n"
-        f"⚠️ _Always verify with a KVK officer before treatment._"
+        f"🌿 *KrishiDoc Report*\n"
+        f"🌾 *Crop / फसल:* {crop}\n"
+        f"🩺 *Disease / रोग:* {disease} ({disease_type})\n"
+        f"⚠️ *Severity / गंभीरता:* {severity}\n"
+        f"📊 *Confidence / विश्वास:* {confidence}%\n"
+        f"📉 *Yield Risk / उपज हानि:* {yield_risk}\n"
+        f"📅 *Revisit / दोबारा जांच:* {revisit}\n\n"
+        f"🔍 *Symptoms / लक्षण:*\n{symptoms}\n\n"
+        f"🍃 *Organic / जैविक:*\n{organic}\n\n"
+        f"🧪 *Chemical / रासायनिक:*\n{chemical}\n\n"
+        f"⚠️ _KVK officer से सत्यापित करें / Verify with KVK officer._"
     )
 
 
