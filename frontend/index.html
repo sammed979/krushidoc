@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiDoc — AI Crop Doctor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container selection-page">
+        <header class="hero">
+            <div class="logo-container">
+                <span class="logo-icon">🌿</span>
+                <h1>KrishiDoc</h1>
+            </div>
+            <h2>Your AI Crop Doctor</h2>
+            <p>Empowering Indian Farmers with Artificial Intelligence</p>
+        </header>
+
+        <main class="selection-grid">
+            <!-- WhatsApp Card -->
+            <div class="card" onclick="openWhatsApp()">
+                <div class="card-icon">📱</div>
+                <h3>Use WhatsApp</h3>
+                <p>Chat with AI doctor on WhatsApp and send crop images directly.</p>
+                <button class="btn btn-whatsapp">Open WhatsApp Chat</button>
+            </div>
+
+            <!-- Web Analysis Card -->
+            <div class="card" onclick="goToWeb()">
+                <div class="card-icon">🌐</div>
+                <h3>Web Analysis</h3>
+                <p>Upload a crop leaf image and get an instant AI-powered diagnosis.</p>
+                <button class="btn btn-primary">Start Web Analysis</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2024 KrishiDoc AI. Build for the future of Indian agriculture.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

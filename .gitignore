@@ -1,0 +1,26 @@
+# Environment variables - NEVER push these
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+*.egg-info/
+
+# Logs
+*.log
+server.log
+ngrok.log
+
+# Node
+node_modules/
+.vite/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiDoc — AI Web Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container analyze-page">
+        <nav class="navbar">
+            <div class="logo-container" onclick="window.location.href='index.html'">
+                <span class="logo-icon">🌿</span>
+                <h1>KrishiDoc</h1>
+            </div>
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">Back Home</button>
+        </nav>
+
+        <header class="page-header">
+            <h2>AI Web Analysis</h2>
+            <p>Upload a clear crop leaf image for instant diagnosis</p>
+        </header>
+
+        <main class="analysis-section">
+            <!-- Upload Section -->
+            <div class="upload-container">
+                <div class="upload-card" id="drop-zone">
+                    <div id="preview-container" class="hidden">
+                        <img id="image-preview" src="#" alt="Preview">
+                        <button class="btn btn-clear" onclick="clearImage()">Remove Image</button>
+                    </div>
+                    <div id="upload-prompt">
+                        <span class="upload-icon">📸</span>
+                        <p>Click to upload or drag and drop crop image</p>
+                        <span class="file-info">PNG, JPG, JPEG (Max. 5MB)</span>
+                    </div>
+                    <input type="file" id="file-input" accept="image/*" class="hidden">
+                </div>
+                
+                <button id="analyze-btn" class="btn btn-primary btn-large" disabled onclick="uploadImage()">
+                    Analyze Crop Health
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="hidden text-center">
+                <div class="spinner"></div>
+                <h3>Analyzing your crop...</h3>
+                <p>Consulting expert agricultural databases</p>
+            </div>
+
+            <!-- Error Display -->
+             <div id="error-display" class="hidden error-card">
+                <span class="error-icon">⚠️</span>
+                <div class="error-text">
+                    <h4>Analysis Failed</h4>
+                    <p id="error-message">Something went wrong. Please try again.</p>
+                </div>
+             </div>
+
+            <!-- Result Card -->
+            <div id="result-card" class="hidden result-card">
+                <div class="result-header">
+                    <div class="result-title">
+                        <h2 id="res-crop">Wheat</h2>
+                        <p id="res-issue-type">Disease Diagnosis</p>
+                    </div>
+                    <div class="confidence-badge">
+                        <span class="confidence-label">Confidence</span>
+                        <span id="res-confidence" class="confidence-value">98%</span>
+                    </div>
+                </div>
+
+                <div class="result-body">
+                    <div class="result-main">
+                        <div class="main-info-grid">
+                            <section>
+                                <label>DIAGNOSIS</label>
+                                <h3 id="res-diagnosis">Yellow Rust</h3>
+                                <span id="res-severity" class="severity-badge critical">Critical Severity</span>
+                            </section>
+
+                            <section>
+                                <label>REVISIT IN</label>
+                                <p id="res-follow-up" class="info-highlight">7-10 Days</p>
+                                <span class="sub-label">Recommended follow-up period</span>
+                            </section>
+                        </div>
+
+                        <section class="mt-4">
+                            <label>SYMPTOMS</label>
+                            <p id="res-symptoms" class="symptoms-text">"Yellow-colored pustules on the upper leaf surface, organized in long stripes."</p>
+                        </section>
+
+                        <section class="mt-4">
+                            <label>CLIMATE IMPACT</label>
+                            <p id="res-climate" class="climate-box">High humidity and temperatures between 15-25°C are accelerating the spread of this disease.</p>
+                        </section>
+
+                        <section class="mt-4">
+                            <label>YIELD RISK</label>
+                            <p id="res-yield-risk" class="yield-risk-value">40-60%</p>
+                        </section>
+                    </div>
+
+                    <div class="result-remedies">
+                        <div class="remedy-box organic">
+                            <label>ORGANIC REMEDY</label>
+                            <p id="res-organic">Spray Neem oil and avoid overhead irrigation to reduce humidity.</p>
+                        </div>
+
+                        <div class="remedy-box chemical">
+                            <label>CHEMICAL REMEDY</label>
+                            <p id="res-chemical">Apply Propiconazole 25 EC @ 0.1% or Tebuconazole 250 EC @ 0.1%.</p>
+                            <span class="chemical-notice">* Recommended for Indian conditions</span>
+                        </div>
+                    </div>
+
+                    <div class="shop-info mt-6">
+                        <label>WHERE TO BUY REMEDIES</label>
+                        <div class="shop-box">
+                            <span class="shop-icon">🛒</span>
+                            <p id="res-shop">Visit your local registered Krishi Vigyan Kendra (KVK) or any authorized government pesticide dealer for genuine products.</p>
+                        </div>
+                    </div>
+
+                    <div class="safety-alert mt-6">
+                        <div class="safety-content">
+                            <span class="safety-icon">⚠️</span>
+                            <div>
+                                <label>CRITICAL SAFETY WARNING</label>
+                                <p id="res-safety">AI analysis is for guidance only. Always verify with a Krishi Vigyan Kendra (KVK) officer before applying chemical treatments to avoid crop damage.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-footer">
+                    <p>KrishiDoc AI Analysis - Professional Agricultural Diagnostic Report</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
