@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 from ai import analyze_crop_image
 from whatsapp import handle_whatsapp_message
+from database import save_diagnosis
 import uvicorn
 from dotenv import load_dotenv
 
@@ -37,7 +38,8 @@ async def diagnose(file: UploadFile = File(...)):
         
         if "error" in diagnosis:
             raise HTTPException(status_code=500, detail=diagnosis["error"])
-            
+        
+        save_diagnosis(diagnosis, source="web")
         return diagnosis
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Server error: {str(e)}")
