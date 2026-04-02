@@ -555,7 +555,74 @@ footer {
     font-size: 14px;
 }
 
-/* Info Pills */
+/* Dual AI Box */
+.dual-ai-box {
+    background: linear-gradient(135deg, #F0FFF4, #EBF8FF);
+    border: 1px solid #C6F6D5;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.dual-ai-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--agri-green);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.dual-ai-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.ai-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--agri-text);
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.ai-bar-wrap {
+    flex: 1;
+    background: #E2E8F0;
+    border-radius: 100px;
+    height: 10px;
+    overflow: hidden;
+}
+
+.ai-bar {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s ease;
+}
+
+.gemini-bar { background: linear-gradient(90deg, #2D5A27, #68A357); }
+.model-bar  { background: linear-gradient(90deg, #2B6CB0, #4299E1); }
+
+.ai-score {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--agri-text);
+    width: 40px;
+    text-align: right;
+}
+
+.dual-ai-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--agri-gray);
+    font-style: italic;
+}
+
+
 .info-pills {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

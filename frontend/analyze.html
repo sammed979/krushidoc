@@ -67,12 +67,34 @@
                         <p id="res-disease">Disease Name</p>
                     </div>
                     <div class="confidence-badge">
-                        <span class="confidence-label">Confidence</span>
+                        <span class="confidence-label">Combined Score</span>
                         <span id="res-confidence" class="confidence-value">98%</span>
                     </div>
                 </div>
 
                 <div class="result-body">
+                    <!-- Dual AI Score Bar -->
+                    <div class="dual-ai-box">
+                        <div class="dual-ai-title">🤖 Dual AI Analysis</div>
+                        <div class="dual-ai-row">
+                            <span class="ai-label">🧠 Gemini AI</span>
+                            <div class="ai-bar-wrap">
+                                <div class="ai-bar gemini-bar" id="bar-gemini"></div>
+                            </div>
+                            <span id="res-gemini-conf" class="ai-score">92%</span>
+                        </div>
+                        <div class="dual-ai-row">
+                            <span class="ai-label">🤖 Trained Model</span>
+                            <div class="ai-bar-wrap">
+                                <div class="ai-bar model-bar" id="bar-model"></div>
+                            </div>
+                            <span id="res-model-conf" class="ai-score">88%</span>
+                        </div>
+                        <div class="dual-ai-footer">
+                            <span id="res-dataset">PlantVillage Dataset</span>
+                            <span id="res-model-version">KrishiDoc-CNN-v1.0</span>
+                        </div>
+                    </div>
                     <!-- Info Grid -->
                     <div class="info-pills">
                         <div class="pill">

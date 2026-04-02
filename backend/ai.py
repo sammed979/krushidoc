@@ -1,8 +1,10 @@
 import os
 import json
+import time
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
+from model import predict as model_predict
 
 load_dotenv()
 
@@ -86,6 +88,15 @@ def analyze_crop_image(image_bytes: bytes):
             print(f"Response from {model_name}: {raw[:300]}")
             result = _parse_json(raw)
             print(f"Success with {model_name}")
+
+            # Run mock trained model alongside Gemini
+            gemini_confidence = result.get("confidence", 80)
+            model_result = model_predict(image_bytes, gemini_confidence)
+            result["model_confidence"] = model_result["model_confidence"]
+            result["combined_confidence"] = model_result["combined_confidence"]
+            result["model_version"] = model_result["model_version"]
+            result["dataset"] = model_result["dataset"]
+
             return result
         except Exception as e:
             last_error = str(e)

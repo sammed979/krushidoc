@@ -115,11 +115,21 @@ if (document.getElementById('file-input')) {
     function displayResult(data) {
         document.getElementById('res-crop').textContent = data.crop || 'Unknown';
         document.getElementById('res-disease').textContent = data.disease_en || data.disease_or_deficiency || 'Unknown';
-        document.getElementById('res-confidence').textContent = `${data.confidence || 0}%`;
+        document.getElementById('res-confidence').textContent = `${data.combined_confidence || data.confidence || 0}%`;
         document.getElementById('res-scientific').textContent = data.disease_scientific || '';
         document.getElementById('res-type').textContent = data.disease_type || data.issue_type || 'Unknown';
         document.getElementById('res-yield').textContent = data.yield_risk || 'N/A';
         document.getElementById('res-revisit').textContent = data.revisit_days || data.follow_up_days || 'N/A';
+
+        // Dual AI scores
+        const geminiConf = data.confidence || 0;
+        const modelConf = data.model_confidence || 0;
+        document.getElementById('res-gemini-conf').textContent = `${geminiConf}%`;
+        document.getElementById('res-model-conf').textContent = `${modelConf}%`;
+        document.getElementById('bar-gemini').style.width = `${geminiConf}%`;
+        document.getElementById('bar-model').style.width = `${modelConf}%`;
+        document.getElementById('res-dataset').textContent = data.dataset || 'PlantVillage Dataset';
+        document.getElementById('res-model-version').textContent = data.model_version || 'KrishiDoc-CNN-v1.0';
 
         const severityBadge = document.getElementById('res-severity');
         severityBadge.textContent = data.severity || 'Unknown';
