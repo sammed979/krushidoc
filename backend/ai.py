@@ -70,6 +70,8 @@ def analyze_crop_image(image_bytes: bytes):
         "gemini-2.0-flash-lite",
         "gemini-2.5-flash",
         "gemini-2.0-flash-001",
+        "gemini-2.5-pro",
+        "gemini-2.0-flash",
     ]
     last_error = None
 
@@ -88,6 +90,11 @@ def analyze_crop_image(image_bytes: bytes):
         except Exception as e:
             last_error = str(e)
             print(f"Model {model_name} failed: {last_error}")
+            # If quota exhausted wait 10 seconds before trying next model
+            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                import time
+                print(f"Quota hit, waiting 10s before next model...")
+                time.sleep(10)
             continue
 
     return {
