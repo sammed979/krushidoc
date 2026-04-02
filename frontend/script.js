@@ -1,5 +1,5 @@
 // Constants
-const API_URL = 'http://127.0.0.1:8000/diagnose';
+const API_URL = 'https://krushidoc.onrender.com/diagnose';
 const WHATSAPP_NUMBER = '14155238886'; // Replace with your Twilio WhatsApp Sandbox number
 const WHATSAPP_MSG = 'Hello KrishiDoc! I want to analyze my crop health.';
 
