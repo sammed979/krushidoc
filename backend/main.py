@@ -39,7 +39,7 @@ async def diagnose(file: UploadFile = File(...)):
         if "error" in diagnosis:
             raise HTTPException(status_code=500, detail=diagnosis["error"])
         
-        save_diagnosis(diagnosis, source="web")
+        save_diagnosis(diagnosis, source="web", image_bytes=image_content)
         return diagnosis
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Server error: {str(e)}")

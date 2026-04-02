@@ -133,7 +133,7 @@ def handle_whatsapp_message(request_form):
                 f"Please try:\n• A clearer, well-lit photo\n• Closer shot of the affected leaf\n• JPG or PNG format"
             )
         else:
-            save_diagnosis(diagnosis, source="whatsapp")
+            save_diagnosis(diagnosis, source="whatsapp", image_bytes=image_bytes)
             reply = _format_diagnosis(diagnosis)
             print(f"Reply length: {len(reply)} chars")
             _send_whatsapp(from_number, reply)
